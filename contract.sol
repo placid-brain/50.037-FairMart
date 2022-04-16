@@ -20,6 +20,5 @@ contract Coupon {
         emit Transfer(address(0), msg.sender, totalSupply);
     }
 
-    // more stuff to come
 }
 
