@@ -1,24 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-contract Coupon {
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-
-    mapping (address => uint256) public balanceOf;
-
-
-    string public name = "FairMart Coupon";
-    string public symbol = "FMC";
-    uint8 public decimals = 0;
-
-    uint256 public totalSupply = 5000 * (uint256(10) ** decimals);
-    event Transfer(address indexed from, address indexed to, uint256 value);
-    
-    function FairMartCoupon() public {
-        // Initially assign all tokens to the contract's creator.
-        balanceOf[msg.sender] = totalSupply;
-        emit Transfer(address(0), msg.sender, totalSupply);
+contract FairMartCoupon is ERC20, Ownable {
+    constructor() ERC20("FairMart Coupon", "FMC") {
+        _mint(msg.sender, 9000 * 10 ** decimals());
     }
 
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
 }
-
