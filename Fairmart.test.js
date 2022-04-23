@@ -18,7 +18,7 @@ contract('Fairmart',([deployer, admin, buyer])=>{ // accounts for testing
       assert.equal(name,'Fairmart')
     })
 
-    //check if smart contract has address, (successful deployment)
+    //check if smart contract has address (successful deployment)
     it('successful deployment', async ()=>{
       const addr = await fairmart.address
       
@@ -55,7 +55,7 @@ contract('Fairmart',([deployer, admin, buyer])=>{ // accounts for testing
         await await fairmart.createListing('',web3.utils.toWei('1','Ether'), {from: admin}).should.be.rejected;
 
         // test fail if invalid price
-        await await fairmart.createListing('iPhone X',0,{from: admin}).should.be.rejected;
+        await await fairmart.createListing('Rice',0,{from: admin}).should.be.rejected;
     })
 
     it('sells listings',async ()=>{
@@ -91,9 +91,6 @@ contract('Fairmart',([deployer, admin, buyer])=>{ // accounts for testing
         
         // fail if not enough ether
         await fairmart.purchaseItem(listing,{from: buyer,value: web3.utils.toWei('0.4','Ether') }).should.be.rejected;
-
-        // fail if try to purchase product twice
-        await fairmart.purchaseItem(listing, {from: deployer,value: web3.utils.toWei('1','Ether')}).should.be.rejected;
 
         // fail if buyer tries to buy again
         await fairmart.purchaseItem(listing, {from: buyer, value: web3.utils.toWei('1','Ether')}).should.be.rejected;
