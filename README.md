@@ -2,4 +2,4 @@
 50.037 Project
 
 ## Contents
-1. ```contract.sol```: Smart contract written to mint Fairmart coupons
+1. ```contract.sol``` : Smart contract written to mint Fairmart coupons
